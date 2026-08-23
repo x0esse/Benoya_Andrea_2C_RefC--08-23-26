@@ -11,7 +11,7 @@ class Program
         string name = "Andrea";
 
         
-        bool isFemale = true;
+        bool isLesbian = true;
 
 
         
@@ -20,7 +20,7 @@ class Program
         
         Console.WriteLine(age);
         Console.WriteLine(name);
-        Console.WriteLine(isFemale);
+        Console.WriteLine(isLesbian);
         Console.WriteLine(price);
     }
 }
