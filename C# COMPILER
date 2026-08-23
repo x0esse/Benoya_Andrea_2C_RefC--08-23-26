@@ -47,6 +47,15 @@ class Program
 
 
 
+
+
+
+
+
+
+
+
+
 using System;
 
 class Program
@@ -70,5 +79,71 @@ class Program
         string orientation = Console.ReadLine();
 
      
+using System;
+using System.Collections.Generic;
 
+namespace ConsoleStar
+{
+	class Program
+	{
+		const int Width = 61;
+		const int Height = 31;
+		static void Main(string[] args)
+		{
+			char[, ] canvas = new char[Height, Width];
+			for (int y = 0; y < Height; y++)
+				for (int x = 0; x < Width; x++)
+					canvas[y, x] = ' ';
+			double centerX = Width / 2.0;
+			double centerY = Height / 2.0;
+			double outerRadius = Height / 2.0 - 1;
+			double innerRadius = outerRadius * 0.38;
+			int starPoints = 5;
+			var points = new List<(double x, double y)>();
+			int totalNodes = starPoints * 2;
+			double angleStep = Math.PI / starPoints;
+			double startAngle = -Math.PI / 2;
+			for (int i = 0; i < totalNodes; i++)
+			{
+				double currentRadius = (i % 2 == 0) ? outerRadius : innerRadius;
+				double angle = startAngle + (angleStep * i);
+				double x = centerX + (Math.Cos(angle) * currentRadius * 2.2);
+				double y = centerY + (Math.Sin(angle) * currentRadius);
+				points.Add((x, y));
+			}
+
+			for (int i = 0; i < points.Count; i++)
+			{
+				var current = points[i];
+				var next = points[(i + 1) % points.Count];
+				DrawLine(canvas, current, next);
+			}
+
+			for (int y = 0; y < Height; y++)
+			{
+				for (int x = 0; x < Width; x++)
+				{
+					Console.Write(canvas[y, x]);
+				}
+
+				Console.WriteLine();
+			}
+		}
+
+		static void DrawLine(char[, ] canvas, (double x, double y) p1, (double x, double y) p2)
+		{
+			int precisionSteps = (int)Math.Max(Math.Abs(p2.x - p1.x), Math.Abs(p2.y - p1.y)) * 2 + 1;
+			for (int i = 0; i <= precisionSteps; i++)
+			{
+				double t = (double)i / precisionSteps;
+				int x = (int)Math.Round(p1.x + (p2.x - p1.x) * t);
+				int y = (int)Math.Round(p1.y + (p2.y - p1.y) * t);
+				if (x >= 0 && x < Width && y >= 0 && y < Height)
+				{
+					canvas[y, x] = '*';
+				}
+			}
+		}
+	}
+}
 
