@@ -47,28 +47,28 @@ class Program
 
 
 
-
-
 using System;
 
 class Program
 {
     static void Main()
     {
-        
-        string name = "Andrea";
-        int age = 20;
-        double money = 75.99;
-        string orientation = "Lesbian";
-        bool isLesbian = true;
+       
+        Console.Write("Enter your name: ");
+        string name = Console.ReadLine();
+
+       
+        Console.Write("Enter your age: ");
+        int age = Convert.ToInt32(Console.ReadLine());
 
         
-        Console.WriteLine($"Hello, my name is {name} and I am {age} years old. " +
-                          $"Right now, I have ${money} with me. " +
-                          $"My sexual orientation is {orientation}, which is {isLesbian.ToString().ToLower()}.");
-    }
-}
+        Console.Write("Enter your money amount: ");
+        double money = Convert.ToDouble(Console.ReadLine());
 
+        
+        Console.Write("Enter your sexual orientation: ");
+        string orientation = Console.ReadLine();
 
+     
 
 
