@@ -147,3 +147,114 @@ namespace ConsoleStar
 	}
 }
 
+
+
+
+
+
+
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        int playerX = 5;
+        int playerY = 5;
+
+        int starX = 10;
+        int starY = 5;
+
+        int score = 0;
+
+        Random random = new Random();
+
+        Console.CursorVisible = false;
+
+        while (true)
+        {
+            Console.Clear();
+
+            Console.WriteLine("C# Mini Playable Game");
+            Console.WriteLine("Use Arrow Keys to Move");
+            Console.WriteLine("Press Q to Quit");
+            Console.WriteLine("Score: " + score);
+            Console.WriteLine();
+
+            // Draw the game area
+            for (int y = 0; y < 10; y++)
+            {
+                for (int x = 0; x < 20; x++)
+                {
+                    if (x == playerX && y == playerY)
+                    {
+                        Console.Write("@");
+                    }
+                    else if (x == starX && y == starY)
+                    {
+                        Console.Write("*");
+                    }
+                    else
+                    {
+                        Console.Write(".");
+                    }
+                }
+
+                Console.WriteLine();
+            }
+
+            
+            ConsoleKey key = Console.ReadKey(true).Key;
+
+            
+            if (key == ConsoleKey.Q)
+            {
+                break;
+            }
+
+            
+            if (key == ConsoleKey.UpArrow && playerY > 0)
+            {
+                playerY--;
+            }
+
+            
+            if (key == ConsoleKey.DownArrow && playerY < 9)
+            {
+                playerY++;
+            }
+
+            
+            if (key == ConsoleKey.LeftArrow && playerX > 0)
+            {
+                playerX--;
+            }
+
+            
+            if (key == ConsoleKey.RightArrow && playerX < 19)
+            {
+                playerX++;
+            }
+
+            
+            if (playerX == starX && playerY == starY)
+            {
+                score++;
+
+                
+                
+                {
+                    starX = random.Next(0, 20);
+                    starY = random.Next(0, 10);
+
+                } while (starX == playerX && starY == playerY);
+            }
+        }
+
+        Console.CursorVisible = true;
+
+        Console.Clear();
+        Console.WriteLine("Game Over!");
+        Console.WriteLine("Final Score: " + score);
+    }
+}
